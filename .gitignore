@@ -1,0 +1,12 @@
+# Draft working files
+drafts/*.md
+!drafts/.gitkeep
+
+# Claude local settings
+.claude/settings.local.json
+
+# OS files
+.DS_Store
+
+# Node
+node_modules/

@@ -1,0 +1,9 @@
+{
+  "name": "autoblogger",
+  "description": "Generate V0 blog post drafts for the Building Nubank engineering blog. Supports multi-source input (Google Docs, Confluence, GitHub PRs, Slides) and a 4-phase pipeline: idea refinement, story arc drafting, full post generation, and Google Docs export.",
+  "version": "1.0.0",
+  "author": {
+    "name": "AI-Core Team"
+  },
+  "keywords": ["blog", "writing", "nubank", "building-nubank", "v0-draft"]
+}
