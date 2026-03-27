@@ -20,11 +20,16 @@ allowed-tools:
   - mcp__atlassian__getAccessibleAtlassianResources
   - mcp__google-workspace__chat_getMessages
   - mcp__google-workspace__docs_create
-  - mcp__google-workspace__docs_find
-  - mcp__google-workspace__drive_findFolder
-  - mcp__google-workspace__docs_move
   - mcp__google-workspace__drive_search
   - AskUserQuestion
+  - mcp__plugin_slack_slack__slack_search_public
+  - mcp__plugin_slack_slack__slack_read_channel
+  - mcp__plugin_slack_slack__slack_read_thread
+  - mcp__plugin_slack_slack__slack_search_channels
+  - mcp__plugin_slack_slack__slack_search_users
+  - mcp__glean_default__search
+  - mcp__glean_default__chat
+  - mcp__glean_default__read_document
 ---
 
 # Write Post: End-to-End V0 Draft Generation
@@ -37,17 +42,15 @@ Read the style guide from `style-guide.md` in the `generate-post` skill director
 
 Check `$ARGUMENTS` for content. If `$ARGUMENTS` already contains a topic description and/or URLs, skip this phase and proceed directly to Phase 1.
 
-If `$ARGUMENTS` is empty or missing both a topic and source links, interactively ask the user:
+If `$ARGUMENTS` is empty or missing both a topic and source links, greet the user and ask them to describe the post in plain text. Say something like:
 
-1. **Topic** — Use `AskUserQuestion` to ask: "What is this blog post about? Describe the topic, the problem it solves, and any key results." (free-text, no predefined options needed — provide two broad options like "Technical deep-dive" and "Project/launch retrospective" so the user can pick one or type their own description.)
+> Hey! Let's write a blog post. Tell me what it's about — describe the topic, the problem, and any key results. If you have source material (Google Docs, Confluence pages, GitHub PRs, Slides, etc.), paste the links here too. You can send everything in one message or we can go back and forth.
 
-2. **Source material** — Use `AskUserQuestion` to ask: "Do you have source material to work from? Paste links to Google Docs, Confluence pages, GitHub PRs, Google Slides, or anything else. You can also say 'none' to skip." (Provide options like "I'll paste links" and "No source material — generate from the topic description alone".)
-
-Combine the user's answers into a single input string and pass it to Phase 1 as if it were the original `$ARGUMENTS`.
+Then **stop and wait for the user to reply**. Do NOT proceed to Phase 1 until you have a topic description from the user. Once the user responds, use their message as the input for Phase 1. If they didn't include source links, that's fine — just proceed without them.
 
 ## Phase 1: Refine Idea
 
-**Input:** `$ARGUMENTS` (or the combined input from Phase 0) — can contain plain text topic descriptions, Google Doc/Slides URLs, Confluence URLs, GitHub PR URLs, or Chat message links.
+**Input:** `$ARGUMENTS` (or the combined input from Phase 0) — can contain plain text topic descriptions, Google Doc/Slides URLs, Confluence URLs, GitHub PR URLs, Slack links, or Chat message links.
 
 1. Parse the arguments and detect any URLs
 2. For each URL, fetch content using the appropriate tool:
@@ -55,10 +58,12 @@ Combine the user's answers into a single input string and pass it to Phase 1 as 
    - Google Slides: read with `slides_getText`
    - Confluence: read with `getConfluencePage` (use `getAccessibleAtlassianResources` first if needed for cloudId)
    - GitHub PRs: `gh pr view <url>` via Bash
+   - Slack: use `slack_search_channels` to find the channel, then `slack_read_channel` or `slack_read_thread` to fetch messages. For Slack search queries, use `slack_search_public`.
    - Chat: `chat_getMessages`
 3. Synthesize all source material into a structured content brief
-4. Create `drafts/` directory if needed (`mkdir -p drafts` via Bash)
-5. Write to `drafts/<slug>-brief.md`
+4. If after reading the sources there are important ambiguities — e.g. multiple possible angles, unclear target audience, or missing context that would significantly change the post — use `AskUserQuestion` to clarify before writing the brief. Don't ask about minor details; use your judgment on what materially affects the draft.
+5. Create `drafts/` directory if needed (`mkdir -p drafts` via Bash)
+6. Write to `drafts/<slug>-brief.md`
 
 The brief must include: working title, summary, target audience, angle/hook, source material summary, key questions (3-5), core thesis, outline sketch (4-6 sections), differentiating insights, series context, estimated figures (2-4), candidate references (3-5).
 
@@ -93,8 +98,7 @@ The brief must include: working title, summary, target audience, angle/hook, sou
 1. Read the V0 draft from `drafts/<slug>-v0.md`
 2. Extract the title from the first `#` heading
 3. Create a Google Doc titled `[V0 DRAFT] <title>` with the markdown content
-4. Attempt to find a "Drafts" folder and move the doc there
-5. Report the Google Doc URL
+4. Report the Google Doc URL
 
 **Tell the user:** "Phase 4 complete: Google Doc created"
 
