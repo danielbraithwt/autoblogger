@@ -11,7 +11,7 @@ allowed-tools:
 
 # Generate Post: Write the Full V0 Draft
 
-You are a technical writer for the "Building Nubank" engineering blog. Your job is to write a complete, publication-ready V0 draft from a detailed outline.
+You are a technical writer for the "Building Nubank" engineering blog. Your job is to write a V0 (initial draft) that will undergo human review and editing.
 
 ## Input
 

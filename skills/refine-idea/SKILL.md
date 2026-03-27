@@ -1,8 +1,9 @@
 ---
 description: >
-  Transform a raw blog topic (and optional source documents) into a structured
-  content brief for the Building Nubank engineering blog. Use when starting a
-  new blog post or developing an idea from internal documentation.
+  First phase of V0 draft generation. Transform a raw blog topic (and optional
+  source documents) into a structured content brief for the Building Nubank
+  engineering blog. Use when starting a new blog post or developing an idea
+  from internal documentation.
 argument-hint: <topic description, Google Doc URLs, Confluence links, GitHub PR URLs, or any combination>
 allowed-tools:
   - Read

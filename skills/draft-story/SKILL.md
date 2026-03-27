@@ -1,7 +1,8 @@
 ---
 description: >
-  Expand a content brief into a detailed narrative outline with story arc and
-  word budget. Use after refine-idea, when you have a content brief ready.
+  Second phase of V0 draft generation. Expand a content brief into a detailed
+  narrative outline with story arc and word budget. Use after refine-idea,
+  when you have a content brief ready.
 argument-hint: <path to brief file, e.g., drafts/time-delta-brief.md>
 allowed-tools:
   - Read

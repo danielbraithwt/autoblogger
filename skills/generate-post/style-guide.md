@@ -1,5 +1,7 @@
 # Building Nubank Engineering Blog — Style Guide
 
+> **These rules define the target standards for V0 drafts. All output requires human review, editing, and approval before publication.**
+
 This guide encodes the writing conventions of the "Building Nubank" blog, extracted from 9 published posts by the AI-Core team. Apply every rule when generating a V0 draft.
 
 ## Voice & Tone

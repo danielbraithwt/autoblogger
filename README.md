@@ -2,6 +2,8 @@
 
 A Claude Code plugin for generating V0 (initial draft) blog posts for the **Building Nubank** engineering blog.
 
+> **V0 = initial draft.** All output requires human review and editing before publication. The plugin generates a starting point, not a finished product.
+
 ## Installation
 
 **Local development:**

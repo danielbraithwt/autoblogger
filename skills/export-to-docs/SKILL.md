@@ -1,6 +1,6 @@
 ---
 description: >
-  Export a finished blog post markdown file to a Google Doc for team review.
+  Export a V0 draft markdown file to a Google Doc for team review.
   Use after generate-post, when you have a V0 draft ready.
 argument-hint: <path to V0 draft file, e.g., drafts/time-delta-v0.md>
 allowed-tools:
@@ -15,7 +15,7 @@ allowed-tools:
 
 # Export to Docs: Create a Google Doc from the V0 Draft
 
-You are exporting a finished V0 blog post draft to Google Docs for the team review process.
+You are exporting a V0 draft to Google Docs for the team review process.
 
 ## Steps
 
