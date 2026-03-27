@@ -3,7 +3,7 @@ description: >
   End-to-end blog post generation. Runs all 4 phases automatically: refine idea,
   draft story arc, generate full post, and export to Google Docs. Use when you
   want a complete V0 draft from a topic or source documents in one go.
-argument-hint: <topic description, Google Doc URLs, Confluence links, GitHub PR URLs, or any combination>
+argument-hint: "[optional] topic description and/or source URLs"
 allowed-tools:
   - Read
   - Write
@@ -24,6 +24,7 @@ allowed-tools:
   - mcp__google-workspace__drive_findFolder
   - mcp__google-workspace__docs_move
   - mcp__google-workspace__drive_search
+  - AskUserQuestion
 ---
 
 # Write Post: End-to-End V0 Draft Generation
@@ -32,9 +33,21 @@ You are generating a complete V0 blog post for the "Building Nubank" engineering
 
 Read the style guide from `style-guide.md` in the `generate-post` skill directory (at `skills/generate-post/style-guide.md` relative to the plugin root) before starting. Optionally read `examples/example-post.md` for tone calibration.
 
+## Phase 0: Gather Input
+
+Check `$ARGUMENTS` for content. If `$ARGUMENTS` already contains a topic description and/or URLs, skip this phase and proceed directly to Phase 1.
+
+If `$ARGUMENTS` is empty or missing both a topic and source links, interactively ask the user:
+
+1. **Topic** — Use `AskUserQuestion` to ask: "What is this blog post about? Describe the topic, the problem it solves, and any key results." (free-text, no predefined options needed — provide two broad options like "Technical deep-dive" and "Project/launch retrospective" so the user can pick one or type their own description.)
+
+2. **Source material** — Use `AskUserQuestion` to ask: "Do you have source material to work from? Paste links to Google Docs, Confluence pages, GitHub PRs, Google Slides, or anything else. You can also say 'none' to skip." (Provide options like "I'll paste links" and "No source material — generate from the topic description alone".)
+
+Combine the user's answers into a single input string and pass it to Phase 1 as if it were the original `$ARGUMENTS`.
+
 ## Phase 1: Refine Idea
 
-**Input:** `$ARGUMENTS` — can contain plain text topic descriptions, Google Doc/Slides URLs, Confluence URLs, GitHub PR URLs, or Chat message links.
+**Input:** `$ARGUMENTS` (or the combined input from Phase 0) — can contain plain text topic descriptions, Google Doc/Slides URLs, Confluence URLs, GitHub PR URLs, or Chat message links.
 
 1. Parse the arguments and detect any URLs
 2. For each URL, fetch content using the appropriate tool:
