@@ -38,21 +38,23 @@ You are generating a complete V0 blog post for the "Building Nubank" engineering
 
 Read the style guide from `style-guide.md` in the `generate-post` skill directory (at `skills/generate-post/style-guide.md` relative to the plugin root) before starting. Optionally read `examples/example-post.md` for tone calibration.
 
-## Phase 0: Gather Input
+## Phase 0: Gather Input & Shape the Story
 
-Check `$ARGUMENTS` for content. If `$ARGUMENTS` already contains a topic description and/or URLs, skip this phase and proceed directly to Phase 1.
+Read the interview template from `skills/write-post/interview-template.md` (relative to the plugin root) at the start of this phase. This template is your **internal guide only** — never show section names, numbers, or the template structure to the user.
 
-If `$ARGUMENTS` is empty or missing both a topic and source links, greet the user and ask them to describe the post in plain text. Say something like:
+### Step 1: Greeting & source collection
 
-> Hey! Let's write a blog post. Tell me what it's about — describe the topic, the problem, and any key results. If you have source material (Google Docs, Confluence pages, GitHub PRs, Slides, etc.), paste the links here too. You can send everything in one message or we can go back and forth.
+If `$ARGUMENTS` already contains a topic description and/or URLs, skip to Step 2.
 
-Then **stop and wait for the user to reply**. Do NOT proceed to Phase 1 until you have a topic description from the user. Once the user responds, use their message as the input for Phase 1. If they didn't include source links, that's fine — just proceed without them.
+If `$ARGUMENTS` is empty or missing both a topic and source links, greet the user and ask them to describe the post. Say something like:
 
-## Phase 1: Refine Idea
+> Hey! Let's write a blog post. Tell me what it's about — the problem, what you built, and how it turned out. If you have source material (Google Docs, Confluence pages, GitHub PRs, Slides, Slack threads, etc.), paste the links too.
 
-**Input:** `$ARGUMENTS` (or the combined input from Phase 0) — can contain plain text topic descriptions, Google Doc/Slides URLs, Confluence URLs, GitHub PR URLs, Slack links, or Chat message links.
+**Stop and wait for the user to reply.**
 
-1. Parse the arguments and detect any URLs
+### Step 2: Read sources & guide the conversation
+
+1. Parse the user's input (from `$ARGUMENTS` or Step 1) and detect any URLs
 2. For each URL, fetch content using the appropriate tool:
    - Google Docs: extract ID with `docs_extractIdFromUrl`, read with `docs_getText`
    - Google Slides: read with `slides_getText`
@@ -60,10 +62,33 @@ Then **stop and wait for the user to reply**. Do NOT proceed to Phase 1 until yo
    - GitHub PRs: `gh pr view <url>` via Bash
    - Slack: use `slack_search_channels` to find the channel, then `slack_read_channel` or `slack_read_thread` to fetch messages. For Slack search queries, use `slack_search_public`.
    - Chat: `chat_getMessages`
-3. Synthesize all source material into a structured content brief
-4. If after reading the sources there are important ambiguities — e.g. multiple possible angles, unclear target audience, or missing context that would significantly change the post — use `AskUserQuestion` to clarify before writing the brief. Don't ask about minor details; use your judgment on what materially affects the draft.
-5. Create `drafts/` directory if needed (`mkdir -p drafts` via Bash)
-6. Write to `drafts/<slug>-brief.md`
+3. Review the fetched content and the user's description against the interview template internally. Identify which areas are well-covered and which have gaps.
+4. Ask natural follow-up questions to fill gaps. **Do NOT present the template or reference section names.** Instead of "Let's fill in The Trigger section", ask something like "What was the moment you realized the old approach wasn't going to cut it?" Adapt your questions:
+   - If the source material is rich and covers most template areas, ask only about the gaps (e.g. learnings, trade-offs, or what made this hard at Nubank's scale)
+   - If the user is starting from a vague idea, ask more questions to draw out the full story
+   - Group related questions naturally — don't interrogate one topic at a time
+   - Skip anything the sources already answer clearly
+5. **Stop and wait** for the user's response. Continue the conversation until you have enough material to cover the template's key areas (or the user has made clear they want a different structure).
+
+### Step 3: Synthesize a story pitch
+
+Once you have enough material, synthesize everything into a short story pitch in plain language:
+
+- Proposed angle and hook (what makes this interesting)
+- The narrative arc: what triggered the work, what made it hard, how the team solved it, what they learned, and the impact
+- Any open questions or gaps that the draft will need to work around
+
+Present it to the user and ask if this direction feels right. The user can adjust, reorder, or take the story in a completely different direction.
+
+**Stop and wait for confirmation before proceeding to Phase 1.**
+
+## Phase 1: Refine Idea
+
+**Input:** The story pitch confirmed in Phase 0, plus all source material already fetched.
+
+1. Synthesize the confirmed story pitch and all source content into a structured content brief
+2. Create `drafts/` directory if needed (`mkdir -p drafts` via Bash)
+3. Write to `drafts/<slug>-brief.md`
 
 The brief must include: working title, summary, target audience, angle/hook, source material summary, key questions (3-5), core thesis, outline sketch (4-6 sections), differentiating insights, series context, estimated figures (2-4), candidate references (3-5).
 
