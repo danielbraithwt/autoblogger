@@ -81,6 +81,37 @@ Always compare 2-3 approaches and explain why the chosen approach wins.
 - Use Acknowledgements section for broader credit to contributors
 - Subtly connect to Nubank's purpose: fighting complexity, empowering people, customer-centered solutions
 
+## AI Writing Patterns to Avoid
+
+Never use these patterns — they are hallmarks of AI-generated text:
+
+**Punctuation & formatting:**
+- Em-dashes (—) — rewrite using commas, parentheses, colons, or separate sentences
+- Excessive semicolons to join clauses
+
+**Overused words & phrases:**
+- "delve", "delve into"
+- "landscape" (as in "the AI landscape")
+- "tapestry"
+- "leverage" (as a verb — use "use" instead)
+- "utilize" (use "use")
+- "in terms of"
+- "it's worth noting that"
+- "interestingly"
+- "game-changer", "game-changing"
+- "cutting-edge", "state-of-the-art" (unless citing a specific benchmark)
+- "revolutionize"
+- "robust" (when used vaguely)
+- "seamless", "seamlessly"
+- "comprehensive"
+- "Moreover", "Furthermore" as sentence starters (occasional use is fine, but not every paragraph)
+
+**Structural patterns:**
+- Starting multiple paragraphs with "This..."
+- Lists where a paragraph would read more naturally
+- Ending sections with a generic forward-looking sentence ("As we continue to...")
+- "In this post, we will explore..." — just start the content
+
 ## Sentence-Level Rules
 
 - Active voice preferred

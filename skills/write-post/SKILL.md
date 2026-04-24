@@ -80,6 +80,21 @@ The brief must include: working title, summary, target audience, angle/hook, sou
 
 **Tell the user:** "Phase 2 complete: Narrative outline written to drafts/<slug>-outline.md"
 
+### Story Review Checkpoint
+
+Before moving on, present the outline to the user in plain language:
+
+1. Summarize the proposed narrative arc (2-3 sentences)
+2. List each section with its angle and what it covers
+3. Call out the hook, key insight, and how the post ends
+4. Mention any decisions you made (e.g. which approach comparison to lead with, what to cut for word budget)
+
+Then ask:
+
+> Does this story direction look right? Feel free to suggest changes: reorder sections, shift the angle, add or drop topics, change the hook, etc. Or say "looks good" to proceed.
+
+**Stop and wait for the user to reply.** Do NOT proceed to Phase 3 until the user confirms or requests changes. If the user requests changes, revise the outline file, re-present the updated summary, and wait again.
+
 ## Phase 3: Generate Post
 
 1. Read the outline from `drafts/<slug>-outline.md`
@@ -88,8 +103,9 @@ The brief must include: working title, summary, target audience, angle/hook, sou
 4. Apply the Progressive Explanation Pattern in every section
 5. Insert `[FIGURE: ...]` placeholders with detailed descriptions
 6. Add numbered citations and build the References section
-7. Validate: word count 1000-1500, figures present, all claims cited, "we" voice throughout
-8. Write to `drafts/<slug>-v0.md`
+7. Check the draft against the "AI Writing Patterns to Avoid" section of the style guide. Rewrite any em-dashes, flagged words ("delve", "leverage", "utilize", etc.), and flagged structural patterns before finalizing.
+8. Validate: word count 1000-1500, figures present, all claims cited, "we" voice throughout
+9. Write to `drafts/<slug>-v0.md`
 
 **Tell the user:** "Phase 3 complete: V0 draft written to drafts/<slug>-v0.md"
 
