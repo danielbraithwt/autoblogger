@@ -106,11 +106,30 @@ Never use these patterns — they are hallmarks of AI-generated text:
 - "comprehensive"
 - "Moreover", "Furthermore" as sentence starters (occasional use is fine, but not every paragraph)
 
+**Significance inflation:**
+- "this pivotal breakthrough", "this crucial development"
+- "plays a vital role in", "is essential for"
+- "emphasizing the importance of", "reflecting the continued relevance of"
+- Trailing clauses that inflate routine work ("...which represents a significant step forward")
+- State what happened and let the reader judge importance. Do not editorialize.
+
+**Hedging & filler preambles:**
+- "It's important to note that..." (just state the thing)
+- "It goes without saying..." (then don't say it)
+- "Needless to say..."
+- "As we all know..."
+- "At the end of the day..."
+
 **Structural patterns:**
 - Starting multiple paragraphs with "This..."
 - Lists where a paragraph would read more naturally
 - Ending sections with a generic forward-looking sentence ("As we continue to...")
 - "In this post, we will explore..." — just start the content
+
+**Vocabulary & rhythm:**
+- Do not replace the author's specific technical terms with generic synonyms (e.g. don't turn "tokenizer" into "processing component"). Preserve precise vocabulary.
+- Vary paragraph length: mix 2-sentence and 4-sentence paragraphs. Uniform 3-sentence paragraphs are an AI tell.
+- Do not use boldfaced inline headers followed by colons in body paragraphs (e.g. "**Key Insight:** The model..."). Use normal prose or actual subheadings.
 
 ## Sentence-Level Rules
 

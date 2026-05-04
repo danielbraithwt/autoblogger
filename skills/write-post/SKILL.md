@@ -36,7 +36,7 @@ allowed-tools:
 
 You are generating a complete V0 blog post for the "Building Nubank" engineering blog. This runs all four phases of the pipeline automatically, writing intermediate artifacts at each step.
 
-Read the style guide from `style-guide.md` in the `generate-post` skill directory (at `skills/generate-post/style-guide.md` relative to the plugin root) before starting. Optionally read `examples/example-post.md` for tone calibration.
+Read the style guide from `style-guide.md` in the `generate-post` skill directory (at `skills/generate-post/style-guide.md` relative to the plugin root) before starting. Read `examples/example-post.md` (relative to the plugin root) as a tone and style reference. Match the voice, rhythm, and technical depth of this example.
 
 ## Phase 0: Gather Input & Shape the Story
 
@@ -128,7 +128,13 @@ Then ask:
 4. Apply the Progressive Explanation Pattern in every section
 5. Insert `[FIGURE: ...]` placeholders with detailed descriptions
 6. Add numbered citations and build the References section
-7. Check the draft against the "AI Writing Patterns to Avoid" section of the style guide. Rewrite any em-dashes, flagged words ("delve", "leverage", "utilize", etc.), and flagged structural patterns before finalizing.
+7. **Lint pass** — review the complete draft against the "AI Writing Patterns to Avoid" section of the style guide:
+   a. Search for em-dashes, flagged words ("delve", "leverage", "utilize", etc.), and rewrite them
+   b. Search for significance inflation (trailing importance clauses, "pivotal", "crucial development") and remove or rewrite
+   c. Search for hedging preambles ("It's important to note", "Needless to say") and cut them
+   d. Check that the author's specific technical terms from the outline haven't been genericized
+   e. Check paragraph length variation — if 3+ consecutive paragraphs have the same sentence count, vary them
+   f. Check for boldfaced inline headers in body text and convert to normal prose or subheadings
 8. Validate: word count 1000-1500, figures present, all claims cited, "we" voice throughout
 9. Write to `drafts/<slug>-v0.md`
 
@@ -178,3 +184,4 @@ Next steps:
 - **Every major section needs a figure placeholder**
 - **All technical claims need citations**
 - If any phase encounters an error, report it clearly and attempt to continue with the remaining phases
+- **Do not re-run Phase 3 on a draft the user has already manually edited.** Once the user has revised the V0 draft with their own voice and edits, regenerating it will overwrite their work and flatten their voice into AI-default patterns (semantic ablation). If the user wants to regenerate, confirm they understand this will replace their edits.

@@ -17,7 +17,7 @@ You are a technical writer for the "Building Nubank" engineering blog. Your job 
 
 1. Read the outline from the file path provided in `$ARGUMENTS`
 2. Read the style guide from `style-guide.md` (in this skill's directory) for all writing rules
-3. Optionally read `examples/example-post.md` (in the plugin root) for tone calibration
+3. Read `examples/example-post.md` (in the plugin root) as a tone and style reference. Match the voice, rhythm, and technical depth of this example.
 
 ## Writing Process
 
