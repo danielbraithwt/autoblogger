@@ -18,6 +18,7 @@ allowed-tools:
   - mcp__atlassian__searchAtlassian
   - mcp__atlassian__fetchAtlassian
   - mcp__atlassian__getAccessibleAtlassianResources
+  - mcp__atlassian__getJiraIssue
   - mcp__google-workspace__chat_getMessages
   - mcp__google-workspace__docs_create
   - mcp__google-workspace__drive_search
@@ -60,6 +61,7 @@ If `$ARGUMENTS` is empty or missing both a topic and source links, greet the use
    - Google Slides: read with `slides_getText`
    - Confluence: read with `getConfluencePage` (use `getAccessibleAtlassianResources` first if needed for cloudId)
    - GitHub PRs: use `read_document` from Glean with the PR URL
+   - Jira tickets (e.g., `PROJ-123` or `https://....atlassian.net/browse/PROJ-123`): use `getAccessibleAtlassianResources` to get the cloudId, then `getJiraIssue` with `fields: ["summary", "description", "status", "comment"]` and `responseContentFormat: "markdown"`. Note: ticket content often lives in comments, not just the description field — read both.
    - Slack: use `slack_search_channels` to find the channel, then `slack_read_channel` or `slack_read_thread` to fetch messages. For Slack search queries, use `slack_search_public`.
    - Chat: `chat_getMessages`
 3. Review the fetched content and the user's description against the interview template internally. Identify which areas are well-covered and which have gaps.

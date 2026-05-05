@@ -4,7 +4,7 @@ description: >
   source documents) into a structured content brief for the Building Nubank
   engineering blog. Use when starting a new blog post or developing an idea
   from internal documentation.
-argument-hint: <topic description, Google Doc URLs, Confluence links, GitHub PR URLs, or any combination>
+argument-hint: <topic description, Google Doc URLs, Confluence links, GitHub PR URLs, Jira tickets, or any combination>
 allowed-tools:
   - Read
   - Write
@@ -19,6 +19,7 @@ allowed-tools:
   - mcp__atlassian__searchAtlassian
   - mcp__atlassian__fetchAtlassian
   - mcp__atlassian__getAccessibleAtlassianResources
+  - mcp__atlassian__getJiraIssue
   - mcp__google-workspace__chat_getMessages
   - mcp__glean_default__search
   - mcp__glean_default__chat
@@ -38,7 +39,8 @@ The user's input (`$ARGUMENTS`) may contain any combination of:
 3. **Google Slides URLs** (e.g., `https://docs.google.com/presentation/d/...`) — extract ID and read with `slides_getText`
 4. **Confluence URLs** (e.g., `https://....atlassian.net/wiki/...`) — extract page ID and read with `getConfluencePage`
 5. **GitHub PR URLs** (e.g., `https://github.com/org/repo/pull/123`) — use `read_document` from Glean with the PR URL
-6. **Google Chat/Slack links** — attempt to read with `chat_getMessages`
+6. **Jira tickets** (e.g., `PROJ-123` or `https://....atlassian.net/browse/PROJ-123`) — use `getAccessibleAtlassianResources` to get the cloudId, then `getJiraIssue` with `fields: ["summary", "description", "status", "comment"]` and `responseContentFormat: "markdown"`. Note: ticket content often lives in comments, not just the description field — read both.
+7. **Google Chat/Slack links** — attempt to read with `chat_getMessages`
 
 **For each URL detected:**
 - Fetch the content using the appropriate tool
