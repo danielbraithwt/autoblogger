@@ -20,6 +20,9 @@ allowed-tools:
   - mcp__atlassian__fetchAtlassian
   - mcp__atlassian__getAccessibleAtlassianResources
   - mcp__google-workspace__chat_getMessages
+  - mcp__glean_default__search
+  - mcp__glean_default__chat
+  - mcp__glean_default__read_document
 ---
 
 # Refine Idea: Generate a Content Brief
@@ -34,7 +37,7 @@ The user's input (`$ARGUMENTS`) may contain any combination of:
 2. **Google Doc URLs** (e.g., `https://docs.google.com/document/d/...`) — extract the document ID and read with `docs_getText`
 3. **Google Slides URLs** (e.g., `https://docs.google.com/presentation/d/...`) — extract ID and read with `slides_getText`
 4. **Confluence URLs** (e.g., `https://....atlassian.net/wiki/...`) — extract page ID and read with `getConfluencePage`
-5. **GitHub PR URLs** (e.g., `https://github.com/org/repo/pull/123`) — read with `gh pr view <url>` via Bash
+5. **GitHub PR URLs** (e.g., `https://github.com/org/repo/pull/123`) — use `read_document` from Glean with the PR URL
 6. **Google Chat/Slack links** — attempt to read with `chat_getMessages`
 
 **For each URL detected:**

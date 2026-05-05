@@ -59,7 +59,7 @@ If `$ARGUMENTS` is empty or missing both a topic and source links, greet the use
    - Google Docs: extract ID with `docs_extractIdFromUrl`, read with `docs_getText`
    - Google Slides: read with `slides_getText`
    - Confluence: read with `getConfluencePage` (use `getAccessibleAtlassianResources` first if needed for cloudId)
-   - GitHub PRs: `gh pr view <url>` via Bash
+   - GitHub PRs: use `read_document` from Glean with the PR URL
    - Slack: use `slack_search_channels` to find the channel, then `slack_read_channel` or `slack_read_thread` to fetch messages. For Slack search queries, use `slack_search_public`.
    - Chat: `chat_getMessages`
 3. Review the fetched content and the user's description against the interview template internally. Identify which areas are well-covered and which have gaps.
